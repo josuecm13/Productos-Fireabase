@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "282089982625",
+    "firebase_url": "https://manejadorproductos.firebaseio.com",
+    "project_id": "manejadorproductos",
+    "storage_bucket": "manejadorproductos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282089982625:android:4a95e3ced1764d98",
+        "android_client_info": {
+          "package_name": "project.projima.com.productos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282089982625-mptdlt3pio82nob4ht6hvj7edd5krr6k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5965Ej-7ZqUoUXMjKjmstQJqda0HDA0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282089982625-mptdlt3pio82nob4ht6hvj7edd5krr6k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
