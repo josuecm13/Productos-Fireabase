@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -92,9 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
 
-
-
+    public void addProductActivity(View view) {
+        startActivity(new Intent(getApplicationContext(), AddProductActivity.class));
+    }
 }

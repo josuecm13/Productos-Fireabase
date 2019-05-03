@@ -46,12 +46,11 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         Picasso.with(context).load(currentProduct.getIamgeUrl()).into(productViewHolder.productImage);
         productViewHolder.productName.setText(currentProduct.getName());
         productViewHolder.productPrice.setText(String.format("¢ %d",currentProduct.getPrice()));
-        productViewHolder.deleteButton.setOnLongClickListener(new View.OnLongClickListener() {
+        productViewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
+            public void onClick(View v) {
+                DatabaseReference firebase = FirebaseDatabase.getInstance().getReference("productos");
                 firebase.child(currentProduct.getUniqueid()).removeValue();
-                return true;
             }
         });
         final int temp = i;
