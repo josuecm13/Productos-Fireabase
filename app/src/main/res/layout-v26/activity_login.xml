@@ -23,7 +23,6 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:isScrollContainer="false"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -50,10 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
-                    android:imeActionId="6"
                     android:inputType="textEmailAddress"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
+                    android:focusedByDefault="false"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -73,6 +70,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
+                    android:focusedByDefault="false"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>

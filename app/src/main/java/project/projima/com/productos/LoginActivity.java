@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private EditText mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -105,6 +105,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditText emailEditText, passwordEditText;
+                emailEditText = findViewById(R.id.email);
+                passwordEditText = findViewById(R.id.password);
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                if(email.equals(password) && password.equals("")){
+                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                }
                 attemptLogin();
             }
         });
@@ -208,8 +216,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
 
+            logInByEmail(email, password);
+            /*
+
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+            */
         }
     }
 
@@ -298,8 +310,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-        mEmailView.setAdapter(adapter);
     }
 
 
@@ -335,6 +345,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
         */
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     private void logInByEmail(String email, String password) {
