@@ -43,14 +43,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i) {
         final Product currentProduct = productList.get(i);
-        Picasso.with(context).load(currentProduct.getIamgeUrl()).into(productViewHolder.productImage);
+        if(currentProduct.getIamgeUrl() != null)
+            Picasso.with(context).load(currentProduct.getIamgeUrl()).into(productViewHolder.productImage);
         productViewHolder.productName.setText(currentProduct.getName());
         productViewHolder.productPrice.setText(String.format("¢ %d",currentProduct.getPrice()));
-        productViewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+        productViewHolder.deleteButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 DatabaseReference firebase = FirebaseDatabase.getInstance().getReference("productos");
                 firebase.child(currentProduct.getUniqueid()).removeValue();
+                return true;
             }
         });
         final int temp = i;
@@ -86,4 +88,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         }
     }
+
+    public class AddProductViewHolder extends ProductViewHolder {
+
+
+        public AddProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+
+
+    }
+
 }

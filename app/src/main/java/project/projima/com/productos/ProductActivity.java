@@ -26,7 +26,8 @@ public class ProductActivity extends AppCompatActivity {
         Product product = (Product) getIntent().getParcelableExtra("product");
         name.setText(product.getName());
         description.setText(product.getDescription());
-        Picasso.with(getApplicationContext()).load(product.getIamgeUrl()).into(image);
+        if(product.getIamgeUrl() != null)
+            Picasso.with(getApplicationContext()).load(product.getIamgeUrl()).into(image);
         price.setText(String.format("¢ %d",product.getPrice()));
 
 

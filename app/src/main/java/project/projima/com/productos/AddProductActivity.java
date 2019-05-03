@@ -84,45 +84,36 @@ public class AddProductActivity extends AppCompatActivity {
         final DatabaseReference userReference = reference.child("productos").push();
         userReference.setValue(product);
         String uid = userReference.getKey();
+        if(imageUri != null){
+            final StorageReference imgref = storageReference.child(uid+".jpg");
+            UploadTask uploadTask = imgref.putFile(imageUri);
 
-        final StorageReference imgref = storageReference.child(uid+".jpg");
-        UploadTask uploadTask = imgref.putFile(imageUri);
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
 
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
+                    // Continue with the task to get the download URL
+                    return imgref.getDownloadUrl();
                 }
-
-                // Continue with the task to get the download URL
-                return imgref.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                    String url = downloadUri.toString();
-                    userReference.child("image").setValue(url);
-                } else {
-                    // Handle failures
-                    // ...
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        String url = downloadUri.toString();
+                        userReference.child("image").setValue(url);
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    } else {
+                        // Handle failures
+                        // ...
+                    }
                 }
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-        //TODO: agrgar imagen
-        //TODO: agrgar producto
+            });
+        }else{
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
     }
 }

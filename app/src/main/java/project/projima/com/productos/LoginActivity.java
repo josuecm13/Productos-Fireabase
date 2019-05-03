@@ -325,6 +325,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     private void updateUI(FirebaseUser currentUser) {
+        if (currentUser == null){
+            showProgress(false);
+            mPasswordView.setError("Error al iniciar sesión");
+            return;
+        }
         String uid = currentUser.getUid();
         System.out.println("Uid" + uid);
         //todo_ bien
@@ -336,7 +341,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         myTopPostsQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //TODO: Consulta al usuario de la base de datos
             }
 
             @Override
@@ -364,7 +368,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             Toast.makeText(getApplicationContext(), "WrongCredentials",Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                            updateUI(null);
                         }
 
                         // ...

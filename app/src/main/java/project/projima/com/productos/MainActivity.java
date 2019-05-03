@@ -24,11 +24,6 @@ import project.projima.com.productos.model.Product;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO: Inserción de imagenes en porductos
-    //TODO: Función de eliminar producto
-    //TODO: Funcion de añadir producto
-    //TODO: Crear Activities: Agregar Prducto
-
     RecyclerView recyclerView;
     List<Product> productList;
     DatabaseReference databaseReference;
